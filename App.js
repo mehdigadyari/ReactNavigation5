@@ -1,10 +1,12 @@
 import 'react-native-gesture-handler'
 import React, { useState, useEffect } from 'react';
+import { View, ActivityIndicator, AsyncStorage } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import LoginNavigation from './routes/LoginNavigation'
 import MainTabNavigator from './routes/MainTabNavigator'
 import DrawerRoutes from './routes/DrawerRoutes'
-import { View, ActivityIndicator, AsyncStorage } from 'react-native';
+import {LoginContext} from './contexts/LoginContext'
+
 export default function App() {
   const [isLogin, setIsLogin] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -21,6 +23,15 @@ export default function App() {
     })
   }, [])
 
+  const login = async (name) => {
+    await AsyncStorage.setItem('user', name)
+    setIsLogin(true)
+  }
+  const logout = async () => {
+    await AsyncStorage.removeItem('user')
+    setIsLogin(false)
+  }
+
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
@@ -29,17 +40,11 @@ export default function App() {
     )
   }
 
-
-
-
-
-
   return (
-
-
-
     <NavigationContainer>
-      {isLogin ? <MainTabNavigator setIsLogin={setIsLogin} /> : <LoginNavigation setIsLogin={setIsLogin} />}
+      <LoginContext.Provider value={{ login: login, logout: logout }} >
+        {isLogin ? <MainTabNavigator /> : <LoginNavigation />}
+      </LoginContext.Provider>
     </NavigationContainer>
   );
 }

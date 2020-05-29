@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text, TouchableOpacity, AsyncStorage } from 'react-native'
+import {LoginContext} from '../../../contexts/LoginContext'
 
-const HomeScreen = ({ navigation, setIsLogin }) => {
+
+const HomeScreen = ({ navigation }) => {
+    const { logout } = useContext(LoginContext)
     return (
         <View>
             <Text>HomeScreen</Text>
@@ -17,12 +20,7 @@ const HomeScreen = ({ navigation, setIsLogin }) => {
             } >
                 <Text>likes</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={
-                async () => {
-                    await AsyncStorage.removeItem('user')
-                    setIsLogin(false)
-                }
-            } >
+            <TouchableOpacity onPress={() => { logout() }} >
                 <Text style={{ color: 'red' }} >logout</Text>
             </TouchableOpacity>
         </View>

@@ -3,13 +3,11 @@ import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from './page/HomeScreen'
 import LikesScreen from './page/LikesScreen'
 const Stack = createStackNavigator()
-const index = ({ setIsLogin }) => {
+const index = ({  }) => {
     return (
         <Stack.Navigator initialRouteName="home">
             <Stack.Screen name="likes" component={LikesScreen} />
-            <Stack.Screen name="home" >
-                {props => <HomeScreen   {...props} setIsLogin={setIsLogin} />}
-            </Stack.Screen>
+            <Stack.Screen name="home" component={HomeScreen} />
         </Stack.Navigator>
     )
 }

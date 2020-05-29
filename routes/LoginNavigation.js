@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons'
 
 const Stack = createStackNavigator()
 
-const LoginNavigation = ({setIsLogin}) => {
+const LoginNavigation = ({}) => {
     return (
         <Stack.Navigator initialRouteName="LoginScreen" screenOptions={{ header: () => null }} >
 
@@ -22,10 +22,8 @@ const LoginNavigation = ({setIsLogin}) => {
                 //     headerRightContainerStyle:{paddingRight:15}
 
                 // }}
-                name="LoginScreen">
-                {props => <LoginScreen {...props} title="mehdi gadyari" setIsLogin={setIsLogin} />}
-
-            </Stack.Screen>
+                name="LoginScreen" component={LoginScreen} />               
+            
             {/* bejaye ink az component estefade konim az in children ham mishe estefade krds */}
 
         </Stack.Navigator>

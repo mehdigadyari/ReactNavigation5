@@ -10,7 +10,7 @@ import { AntDesign } from '@expo/vector-icons'
 
 const Tabs = createBottomTabNavigator()
 
-const MainTabNavigator = ({setIsLogin}) => {
+const MainTabNavigator = ({ }) => {
     const [count, setCount] = useState(3)
     return (
         <Tabs.Navigator
@@ -36,13 +36,9 @@ const MainTabNavigator = ({setIsLogin}) => {
                             color={color}
                         />
                 }}
-                name="homeStack" >
-                    {props=><HomeStackScreen   {...props} setIsLogin={setIsLogin} />}
-                </Tabs.Screen>
+                name="homeStack" component={HomeStackScreen} />
 
 
-
-                
             <Tabs.Screen
                 options={{
 
@@ -55,8 +51,8 @@ const MainTabNavigator = ({setIsLogin}) => {
                         />
                 }}
                 name="Activity" >
-                    {  props => <Activity {...props} setCount={setCount} /> }
-                </Tabs.Screen>
+                {props => <Activity {...props} setCount={setCount} />}
+            </Tabs.Screen>
 
 
 
